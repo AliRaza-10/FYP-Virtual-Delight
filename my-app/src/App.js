@@ -2,8 +2,9 @@
 import React, {useState} from 'react';
 import './App.css';
 import Alert from './components/Alert';
-import Login from './components/Login';
+import Login from './components/Login.js';
 import Navbar from './components/Navbar';
+import Signup from './components/SignUp.js';
 import {
   BrowserRouter,
   Routes,
@@ -37,13 +38,15 @@ function App() {
   return (
     <>
   <BrowserRouter>
-  <Navbar title = "Button2" mode = {mode} toggleMode = {toggleMode}/>
+  
+  <Navbar title = "SignUP" mode = {mode} toggleMode = {toggleMode}/>
   <Alert alert = {alert}/>
-  <Routes>   
+  <Routes> 
+  <Route path = "/" element = {<Signup mode={mode}/>} />  
   <Route path = "/login" element = {<Login mode={mode}/>} />
   </Routes>
     <Routes>
-    <Route path = "/about" element = {<Login mode={mode}/>} />
+    <Route path = "/signup" element = {<Signup mode={mode}/>} />
     </Routes>
   {/*<About/>*/}
   </BrowserRouter>
