@@ -111,3 +111,37 @@ a{
   align-items: center;
   height: 100vh; /* Optional: Set height to full viewport height */
 }
+
+
+/* .loginContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  width: 25em;
+  background-color: rgb(255, 255, 255);
+  border-radius: 25px;
+  
+  background-image: url('D:\FYP-Virtual-Delight\Background images\interior-tech-technology-coffee.jpg');
+  background-size: cover; 
+} */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  /* Add background image style for the entire page */
+  background-image: url('D:\FYP-Virtual-Delight\Background images\wallpaperflare.com_wallpaper.jpg');
+  background-size: cover; /* Adjust as needed */
+}
+
+.App {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100vw;
+  min-height: 100vh;
+  background: linear-gradient(rgb(166, 159, 255), rgb(214, 214, 214));
+}
+
