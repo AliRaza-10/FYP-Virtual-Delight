@@ -132,7 +132,8 @@ body {
   padding: 0;
   font-family: 'Arial', sans-serif;
   /* Add background image style for the entire page */
-  background-image: url('D:\FYP-Virtual-Delight\Background images\wallpaperflare.com_wallpaper.jpg');
+  /* background-image: url('D:\FYP-Virtual-Delight\Background images\wallpaperflare.com_wallpaper.jpg'); */
+  background-image: url('C:\Users\A.H Computer\FYP-Virtual Delight\FYP-Virtual-Delight\Background images\wallpaperflare.com_wallpaper.jpg');
   background-size: cover; /* Adjust as needed */
 }
 
