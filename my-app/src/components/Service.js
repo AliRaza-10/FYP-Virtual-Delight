@@ -31,16 +31,17 @@ const Service = () => {
                         <Link to ="/home" className="nav-item nav-link">Home</Link>
                         <Link  to ="/about" className="nav-item nav-link">About</Link>
                         <Link to ="/service" className="nav-item nav-link active">Service</Link>
-                        <a href="menu.html" className="nav-item nav-link">Menu</a>
-                        <div className="nav-item dropdown">
+                        <Link to="/menu" className="nav-item nav-link">Menu</Link>
+                        {/* <div className="nav-item dropdown">
                             <Link href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</Link>
                             <div className="dropdown-menu m-0">
                                 <a href="booking.html" className="dropdown-item">Booking</a>
                                 <a href="team.html" className="dropdown-item">Our Team</a>
                                 <a href="testimonial.html" className="dropdown-item">Testimonial</a>
                             </div>
-                        </div>
-                        <a href="contact.html" className="nav-item nav-link">Contact</a>
+                        </div> */}
+                        <Link to="/booking" className="nav-item nav-link">Booking</Link>
+                        <Link to="/contact" className="nav-item nav-link">Contact</Link>
                     </div>
                     {/* <Link href="" className="btn btn-primary py-2 px-4">Book A Table</Link> */}
                 </div>
@@ -51,8 +52,8 @@ const Service = () => {
                     <h1 className="display-3 text-white mb-3 animated slideInDown">Services</h1>
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb justify-content-center text-uppercase">
-                            <li className="breadcrumb-item"><Link href="#">Home</Link></li>
-                            <li className="breadcrumb-item"><Link href="#">Pages</Link></li>
+                            <li className="breadcrumb-item"><Link to="/home">Home</Link></li>
+                            <li className="breadcrumb-item"><Link to="/menu">Menu</Link></li>
                             <li className="breadcrumb-item text-white active" aria-current="page">Service</li>
                         </ol>
                     </nav>

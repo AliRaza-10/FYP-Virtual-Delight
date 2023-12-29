@@ -19,13 +19,13 @@ export default function Navbar(props) {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <Link className="nav-link" to="/about">About</Link>
+          <Link className="nav-link" to="/home">Home</Link>
         </li>
       </ul> 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <Link className="nav-link" to="/home">Home</Link>
+          <Link className="nav-link" to="/about">About</Link>
         </li>
       </ul> 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -34,6 +34,12 @@ export default function Navbar(props) {
           <Link className="nav-link" to="/service">Service</Link>
         </li>
       </ul> 
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+        <li className="nav-item">
+          <Link className="nav-link" to="/menu">Menu</Link>
+        </li>
+      </ul>
       
        {/* Template literal ye text k dark or light k according change kry ga */}
       <div className={`form-check form-switch text-${props.mode==='light'?'dark':'white'}`}> 
@@ -47,6 +53,7 @@ export default function Navbar(props) {
   </div> 
   </div>
   </div>
+</div>
 </div>
 </nav>
   )

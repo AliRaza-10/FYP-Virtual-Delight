@@ -8,6 +8,9 @@ import Signup from './components/SignUp.js';
 import About from './components/About.js';
 import Home from './components/Home.js';
 import Service from './components/Service.js';
+import Menu from  './components/Menu.js';
+import Booking from './components/Booking.js';
+import Contact from './components/Contact.js';
 import {
   BrowserRouter,
   Routes,
@@ -26,7 +29,7 @@ function App() {
     }, 1500);
 
   }
-  const toggleMode = () => {
+   const toggleMode = () => {
     if(mode === 'light'){
       setMode('dark');
       document.body.style.backgroundColor = '#042743';
@@ -53,14 +56,17 @@ function App() {
     </Routes>
     <Routes>
     <Route path = "/about" element = {<About mode={mode}/>} />
-    </Routes> */}
+    </Routes> mode={mode} */}
     <Routes>
-          <Route path="/" element={<Signup mode={mode} />} />
-          <Route path="/login" element={<Login mode={mode} />} />
-          <Route path="/signup" element={<Signup mode={mode} />} />
-          <Route path="/about" element={<About mode={mode} />} />
-          <Route path="/home" element={<Home mode={mode} />} />
-          <Route path="/service" element={<Service mode={mode} />} />
+          <Route path="/" element={<Signup/>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup  />} />
+          <Route path="/about" element={<About  />} />
+          <Route path="/home" element={<Home  />} />
+          <Route path="/service" element={<Service  />} />
+          <Route path="/menu" element={<Menu  />} />
+          <Route path="/booking" element={<Booking  />} />
+          <Route path="/contact" element={<Contact  />} />
         </Routes>
   </BrowserRouter>
     </>
