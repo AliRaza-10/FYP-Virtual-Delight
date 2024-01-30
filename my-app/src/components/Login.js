@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 import "C:\\Users\\A.H Computer\\FYP-Virtual Delight\\FYP-Virtual-Delight\\my-app\\src\\App.css";
 // import "E:\\FYP-Virtual-Delight\\my-app\\src\\App.css"
 // import "D:\\FYP-Virtual-Delight\\my-app\\src\\App.css"
@@ -41,7 +42,7 @@ function Login() {
     return (
         <div className="loginForm">
             <div className="loginContainer">
-                <h1>Welcome Back!</h1>
+                <h1>Login Page</h1>
 
                 <div className="input-container">
                     <label>Username </label>
@@ -53,7 +54,8 @@ function Login() {
                 </div>
 
                 <a href="/forgot-password">Forgot password?</a>
-                <a href="/create-account">Create a new account</a>
+                {/* <a href="/create-account">Create a new account</a> */}
+                <Link to="/create-account">Create a new account</Link>
 
                 <button className="loginBut" onClick={handleLogin}>
                     <p>Login</p>
