@@ -67,6 +67,7 @@ function App() {
           <Route path="/menu" element={<Menu  />} />
           <Route path="/booking" element={<Booking  />} />
           <Route path="/contact" element={<Contact  />} />
+          <Route path="/create-account" element={<Signup  />} />
         </Routes>
   </BrowserRouter>
     </>
