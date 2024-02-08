@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -41,8 +40,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
 ]
-
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -75,25 +72,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'VirtualDelight.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
 DATABASES = {
-       'default': {
-           'ENGINE': 'djongo',
-           'CLIENT': {
-            'host': 'localhost',  # Replace with your MongoDB host address
-            'port': 27017,  # Replace with your MongoDB port
-            # 'username': 'your_username',  # Replace with your MongoDB username (if applicable)
-            # 'password': 'your_password',  # Replace with your MongoDB password (if applicable)
-            # 'authSource': 'admin'  # Replace with the authentication database
-            },
-           'NAME': 'VirtualDelight',
-           
-       }
-   }
-
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -145,7 +129,7 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 APPEND_SLASH = False
 
@@ -153,4 +137,9 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
 ]
 
-#Numeer nomi123@
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+#Numeer 1234

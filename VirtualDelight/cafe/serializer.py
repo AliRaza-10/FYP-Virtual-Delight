@@ -5,46 +5,90 @@ from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth import authenticate
 from rest_framework import serializers
 
-class RegisterSerializer(serializers.ModelSerializer):
+
+class UserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
-        required=True,
-        validators=[UniqueValidator(queryset=User.objects.all())]
-    )
-
-    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
-    confirmPassword = serializers.CharField(write_only=True, required=True)  # Rename confirmPassword to match the serializer field name
-
+            required=True,
+            validators=[UniqueValidator(queryset=User.objects.all())]
+            )
     class Meta:
-        model = User
-        fields = ('username','password', 'confirmPassword', 'email')
-
-    def validate(self, attrs):
-        if attrs['password'] != attrs['confirmPassword']:
-            raise serializers.ValidationError({"password": "Password fields didn't match."})
-
-        return attrs
+        model = CustomUser
+        fields = ('username', 'password', 'email', 'phoneNo')
 
     def create(self, validated_data):
-        password = validated_data.pop('password')
-        confirmPassword = validated_data.pop('confirmPassword')  
-
-        if password != confirmPassword:
-            raise serializers.ValidationError({"password": "Password fields didn't match."})
-
-        user = User.objects.create(**validated_data)
-        user.set_password(password)
-        user.save()
-
+        user = CustomUser.objects.create_user(**validated_data)
         return user
 
 
+class DeliverySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Delivery
+        fields = '__all__'
 
-class LoginSerializer(serializers.Serializer):
-    username = serializers.CharField()
-    password = serializers.CharField()
 
-    def validate(self, data):
-        user = authenticate(**data)
-        if user and user.is_active:
-            return user
-        raise serializers.ValidationError("Incorrect Credentials")
+class FeedbackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Feedback
+        fields = '__all__'
+
+
+class LoyaltyPointSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LoyaltyPoint
+        fields = '__all__'
+
+
+class MenuSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Menu
+        fields = '__all__'
+
+
+class OrderItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderItem
+        fields = '__all__'
+
+    def get_items(self, obj):
+        return [item.menu.itemName for item in obj.items.all()]
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    order_items = OrderItemSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Order
+        fields = ['user', 'orderTotalAmount', 'status', 'orderDate', 'order_items']
+
+    def get_items(self, obj):
+        return [item.menu.itemName for item in obj.order_items.all()]
+
+
+class OrderTrackingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = '__all__'
+
+
+class PaymentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Payment
+        fields = '__all__'
+
+
+class TableReservationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TableReservation
+        fields = '__all__'
+
+
+class RoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Role
+        fields = '__all__'
+
+
+class UserRoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserRole
+        fields = '__all__'
