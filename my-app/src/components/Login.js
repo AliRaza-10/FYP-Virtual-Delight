@@ -15,10 +15,12 @@ function Login() {
     const handlePasswordChange = (event) => {
         setPassword(event.target.value); // Update password state
     };
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
     const handleLogin = async () => {
         try {
-            const response = await fetch('http://localhost:8000/login/', {
+            const response = await fetch('http://localhost:8000/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -27,23 +29,32 @@ function Login() {
             });
 
             const data = await response.json();
+            console.log(data);
             if (data.success) {
-                console.log(data.message);
-                // Navigate to protected route
-                
+                setSuccessMessage("Login Successfully");
+                setErrorMessage('');
             } else {
-                console.error(data.message);
+                setErrorMessage('Login Failed');
+                setSuccessMessage('');
             }
-        } catch (error) {
-            console.error('Error:', error);
-        }
+        } catch (errorMessage) {
+            if (!errorMessage?.response) {
+                setErrorMessage('No Server Response');
+            } else if (errorMessage.response?.status === 400) {
+                setErrorMessage('Missing Username or Password');
+            } else if (errorMessage.response?.status === 401) {
+                setErrorMessage('Unauthorized');
+            } else {
+                setErrorMessage('Login Failed');
+            }        }
     };
 
     return (
         <div className="loginForm">
             <div className="loginContainer">
+            <h3 className="text-success mt-3">{successMessage}</h3>
                 <h1>Login Page</h1>
-
+                <p className="alert-danger" aria-live="assertive">{errorMessage}</p>
                 <div className="input-container">
                     <label>Username </label>
                     <input type="text" name="uname" value={username} onChange={handleUsernameChange} required />

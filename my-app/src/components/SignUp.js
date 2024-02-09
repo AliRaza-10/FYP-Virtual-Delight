@@ -11,53 +11,74 @@ function Signup() {
     lastName: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    phoneNo: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Add your signup logic here, such as making an API call or processing the form data
     try {
-      const response = await fetch('http://localhost:8000/register/', {
+      const response = await fetch('http://localhost:8000/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
-  
+      console.log(response);
       if (response.ok) {
         const data = await response.json();
+        setSuccessMessage(data.message);
+        setErrorMessage('');
         console.log('User registered successfully:', data);
-        // Handle successful registration, such as redirecting the user or displaying a success message
       } else {
         const errorData = await response.json();
+        if (errorData.username && errorData.username.length > 0) {
+          setErrorMessage(errorData.username[0]); // Username already exists
+        } else if (errorData.email && errorData.email.length > 0) {
+          setErrorMessage("Email must be unique"); // Email must be unique
+        } else if (errorData.phoneNo && errorData.phoneNo.length > 0) {
+          setErrorMessage("Phone No is required"); // Phone number is required
+        } else {
+          setErrorMessage('Registration failed. Please check your inputs.'); // Generic error message
+        }
+  
+        setSuccessMessage('');
         console.error('Registration failed:', errorData);
-        // Handle registration failure, such as displaying error messages to the user
       }
     } catch (error) {
       console.error('Error during registration:', error);
-      // Handle other errors, such as network issues
+      setErrorMessage('An error occurred during registration');
+      setSuccessMessage('');
     }
   
-    console.log("Form submitted:", formData);
-    // Reset the form after submission
     setFormData({
       username: "",
       email: "",
       password: "",
-      confirmPassword: "",
+      phoneNo: "",
     });
   };
 
   return (
     <div className="loginForm">
       <div className="loginContainer signupContainer">
+      {successMessage && (
+        <div>
+          <h3 className="text-success">{successMessage}</h3>
+        </div>
+      )}
+      {errorMessage && (
+        <div className="alert alert-danger" role="alert">
+          <p>{errorMessage}</p>
+        </div>
+      )}
         <h1>Create an Account</h1>
 
         <div className="input-container">
@@ -94,11 +115,11 @@ function Signup() {
         </div>
 
         <div className="input-container">
-          <label>Confirm Password</label>
+          <label>Phone No</label>
           <input
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
+            type="number"
+            name="phoneNo"
+            value={formData.phoneNo}
             onChange={handleChange}
             required
           />
