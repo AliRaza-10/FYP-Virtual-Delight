@@ -76,14 +76,30 @@ class OrderItem(models.Model):
         return f"{self.itemQuantity} x {self.menu.itemName} - Price: {self.itemPrice}"
 
 
+class Table(models.Model):
+    RESERVED = 'reserved'
+    FREE = 'free'
+
+    STATUS_CHOICES = [
+        (RESERVED, 'Reserved'),
+        (FREE, 'Free'),
+    ]
+    tableNo = models.IntegerField()
+    status = models.CharField(max_length=50,choices=STATUS_CHOICES, default='free')
+
+    def __str__(self):
+        return f"{self.tableNo}"
+
 
 class TableReservation(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    tableNo = models.CharField(max_length=10)
+    tableNo = models.ForeignKey(Table ,on_delete=models.CASCADE)
     startTime = models.DateTimeField()
     duration = models.DurationField()
-    status = models.CharField(max_length=50)
     noOfPeople = models.IntegerField()
+
+    def __str__(self):
+        return f"Table no {self.tableNo.tableNo} reserved for {self.user.username}"
 
 
 class Delivery(models.Model):
