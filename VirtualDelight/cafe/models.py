@@ -40,7 +40,7 @@ class UserRole(models.Model):
 
 class Menu(models.Model):
     itemName = models.CharField(max_length=255)
-    itemPrice = models.DecimalField(max_digits=10, decimal_places=5)
+    itemPrice = models.DecimalField(max_digits=10, decimal_places=2)
     menuPic = models.ImageField(upload_to='menu_pics/')
 
     def __str__(self):
