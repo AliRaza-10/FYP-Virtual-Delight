@@ -82,19 +82,19 @@ const Booking = () => {
                                         <div className="col-md-6">
                                             <div className="form-floating">
                                                 <input type="text" className="form-control" id="name" placeholder="Your Name" />
-                                                <label for="name">Your Name</label>
+                                                <label htmlFor="name">Your Name</label>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-floating">
                                                 <input type="email" className="form-control" id="email" placeholder="Your Email" />
-                                                <label for="email">Your Email</label>
+                                                <label htmlFor="email">Your Email</label>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-floating date" id="date3" data-target-input="nearest">
                                                 <input type="text" className="form-control datetimepicker-input" id="datetime" placeholder="Date & Time" data-target="#date3" data-toggle="datetimepicker" />
-                                                <label for="datetime">Date & Time</label>
+                                                <label htmlFor="datetime">Date & Time</label>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
@@ -104,13 +104,13 @@ const Booking = () => {
                                                     <option value="2">People 2</option>
                                                     <option value="3">People 3</option>
                                                 </select>
-                                                <label for="select1">No Of People</label>
+                                                <label htmlFor="select1">No Of People</label>
                                             </div>
                                         </div>
                                         <div className="col-12">
                                             <div className="form-floating">
                                                 <textarea className="form-control" placeholder="Special Request" id="message" style={{ height: '100px' }}></textarea>
-                                                <label for="message">Special Request</label>
+                                                <label htmlFor="message">Special Request</label>
                                             </div>
                                         </div>
                                         <div className="col-12">
