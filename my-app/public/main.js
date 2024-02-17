@@ -12,7 +12,6 @@
 //     };
 //     spinner();
 
-    
 //     new WOW().init();
 
 //     // Sticky Navbar

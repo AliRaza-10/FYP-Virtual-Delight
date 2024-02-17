@@ -4,8 +4,10 @@ import '../styles.css';
 import '../bootstrap.min.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
-const About = () => {
+
+const Menu = () => {
     const [menuItems, setMenuItems] = useState([]);
+    const [cart, setCart] = useState([]);
 
     useEffect(() => {
         const fetchMenu = async () => {
@@ -20,6 +22,41 @@ const About = () => {
 
         fetchMenu();
     }, []);
+    const addToCart = (item) => {
+        const updatedCart = Array.isArray(cart) ? [...cart] : [];
+        const existingItemIndex = updatedCart.findIndex(cartItem => cartItem.id === item.id);
+
+        if (existingItemIndex !== -1) {
+            // Item already in cart, update quantity
+            updatedCart[existingItemIndex].quantity += 1;
+        } else {
+            // Item not in cart, add to cart with quantity 1
+            updatedCart.push({ ...item, quantity: 1 });
+        }
+
+        setCart(updatedCart);
+    };
+
+    const removeFromCart = (item) => {
+        const updatedCart = Array.isArray(cart) ? [...cart] : [];
+        const existingItemIndex = updatedCart.findIndex(cartItem => cartItem.id === item.id);
+
+        if (existingItemIndex !== -1) {
+            // Item in cart, update quantity or remove if quantity is 1
+            if (updatedCart[existingItemIndex].quantity > 1) {
+                updatedCart[existingItemIndex].quantity -= 1;
+            } else {
+                updatedCart.splice(existingItemIndex, 1);
+            }
+            setCart(updatedCart);
+        }
+    };
+
+    // Function to update the total price in the cart
+    const getTotalPrice = () => {
+        return Array.isArray(cart) ? cart.reduce((total, item) => total + (item.itemPrice * item.quantity), 0) : 0;
+    };
+
     return (
         <>
             <div className="container-xxl bg-white p-0">
@@ -39,14 +76,6 @@ const About = () => {
                                 <Link to="/about" className="nav-item nav-link">About</Link>
                                 <Link to="/service" className="nav-item nav-link">Service</Link>
                                 <Link to="/menu" className="nav-item nav-link active">Menu</Link>
-                                {/* <div className="nav-item dropdown">
-                            <Link href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</Link>
-                            <div className="dropdown-menu m-0">
-                                <a href="booking.html" className="dropdown-item">Booking</a>
-                                <a href="team.html" className="dropdown-item">Our Team</a>
-                                <a href="testimonial.html" className="dropdown-item">Testimonial</a>
-                            </div>
-                        </div> */}
                                 <Link to="/booking" className="nav-item nav-link">Booking</Link>
                                 <Link to="/contact" className="nav-item nav-link">Contact</Link>
                             </div>
@@ -122,6 +151,12 @@ const About = () => {
                                                             <span>{item.itemName}</span>
                                                             <span className="text-primary">{item.itemPrice} Rs</span>
                                                         </h5>
+                                                        <div className="d-flex align-items-center">
+                                                            <button onClick={() => addToCart(item)} className="btn btn-primary btn-sm me-2">+</button>
+                                                            <span className="me-2">{(cart.find(cartItem => cartItem.id === item.id) || {}).quantity || 0}</span>
+                                                            <button onClick={() => removeFromCart(item)} className="btn btn-danger btn-sm">-</button>
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -132,6 +167,21 @@ const About = () => {
                         </div>
                     </div>
                 </div>
+                {/* Cart Box */}
+                {Array.isArray(cart) && cart.length > 0 && (
+                    <div className="cart-box">
+                        <h3>Order Cart</h3>
+                        <ul>
+                            {cart.map(item => (
+                                <li key={item.id}>
+                                    {item.itemName} x {item.quantity} - {item.itemPrice * item.quantity} Rs
+                                    <button onClick={() => removeFromCart(item)}>Remove</button>
+                                </li>
+                            ))}
+                        </ul>
+                        <p>Total Price: {getTotalPrice()} Rs</p>
+                    </div>
+                )}
                 {/* <!-- Menu End --> */}
                 {/* <!-- Footer Start --> */}
                 <div className="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
@@ -200,4 +250,4 @@ const About = () => {
         </>
     )
 }
-export default About;
+export default Menu;

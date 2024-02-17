@@ -476,3 +476,131 @@
     padding-right: 0;
     border-right: none;
 }
+/* Add this CSS to your styles */
+.cart-box {
+  border: 2px solid #ddd;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #f9f9f9;
+}
+
+.cart-box h3 {
+  color: #333;
+}
+
+.cart-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cart-box li {
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-box button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.cart-box button:hover {
+  background-color: #c82333;
+}
+/* Add this CSS to your styles */
+.cart-box {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  width: 200px; /* Adjust the width as needed */
+}
+
+.cart-box h3 {
+  color: #333;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.cart-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cart-box li {
+  border-bottom: 1px solid #ddd;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.cart-box button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 5px 8px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.cart-box button:hover {
+  background-color: #c82333;
+}
+/* Add this CSS to your styles */
+.cart-box {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 20px;
+    background: linear-gradient(to bottom right, #cfa83a, #2196f3); /* Change to your preferred background color */
+    color: #080311; /* Change to your preferred text color */
+    width: 200px; /* Adjust the width as needed */
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 1000;
+  }
+  
+  .cart-box h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .cart-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .cart-box li {
+    border-bottom: 1px solid #ddd;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+  }
+  
+  .cart-box button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 5px 8px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  
+  .cart-box button:hover {
+    background-color: #ee5f1e;
+  }
+  

@@ -47,18 +47,8 @@ function App() {
   
   <Navbar title = "SignUP" mode = {mode} toggleMode = {toggleMode}/>
   <Alert alert = {alert}/>
-  {/* <Routes> 
-  <Route path = "/" element = {<Signup mode={mode}/>} />  
-  <Route path = "/login" element = {<Login mode={mode}/>} />
-  </Routes>
     <Routes>
-    <Route path = "/signup" element = {<Signup mode={mode}/>} />
-    </Routes>
-    <Routes>
-    <Route path = "/about" element = {<About mode={mode}/>} />
-    </Routes> mode={mode} */}
-    <Routes>
-          <Route path="/" element={<Signup/>} />
+          <Route path="/" element={<Home/>} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup  />} />
           <Route path="/about" element={<About  />} />
