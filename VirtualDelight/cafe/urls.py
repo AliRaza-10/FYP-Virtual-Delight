@@ -14,6 +14,7 @@ urlpatterns = [
     path('orderitem', views.OrderItemView.as_view(), name='orderitem'),
     path('ordertracking', views.OrderTrackingView.as_view(), name='ordertracking'),
     path('payment', views.PaymentView.as_view(), name='payment'),
+    path('table', views.TableView.as_view(), name='table'),
     path('reservation', views.TableReservationView.as_view(), name='reservation'),
     path('role', views.RoleView.as_view(), name='role'),
     path('userrole', views.UserRoleView.as_view(), name='userrole'),
