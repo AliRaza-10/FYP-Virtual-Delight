@@ -76,6 +76,12 @@ class PaymentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class TableSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Table
+        fields = '__all__'
+
+        
 class TableReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = TableReservation
