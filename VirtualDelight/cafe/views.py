@@ -18,6 +18,7 @@ from pymongo import MongoClient
 from .serializer import *
 from .models import Order, OrderItem, Payment, TableReservation, Role, UserRole, Menu, LoyaltyPoint, Feedback, Delivery
 from django.contrib.auth import authenticate, login
+from django.shortcuts import get_list_or_404
 
 # Create your views here.
 class index(APIView):
@@ -103,7 +104,11 @@ class MenuView(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request, *args, **kwargs):
-        menu_instance = Menu.objects.all()
+        category = request.query_params.get('category')
+        if category is not None:
+            menu_instance = get_list_or_404(Menu, category=category)
+        else:
+            menu_instance = Menu.objects.all()
         serializer = MenuSerializer(menu_instance, many=True)
         return Response(serializer.data)
 
