@@ -39,8 +39,20 @@ class UserRole(models.Model):
 
 
 class Menu(models.Model):
+    BEVERAGES = 'beverages'
+    SNACKS = 'snacks'
+    DESSERTS = 'desserts'
+    DEALS = 'deals'
+
+    STATUS_CHOICES = [
+        (BEVERAGES,'Beverages'),
+        (SNACKS,'Snacks'),
+        (DESSERTS,'Desserts'),
+        (DEALS,'Deals'),
+    ]
     itemName = models.CharField(max_length=255)
     itemPrice = models.DecimalField(max_digits=10, decimal_places=2)
+    category = models.CharField(max_length=9, choices=STATUS_CHOICES)
     menuPic = models.ImageField(upload_to='menu_pics/')
 
     def __str__(self):
