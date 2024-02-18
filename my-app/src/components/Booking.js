@@ -1,17 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 const Booking = () => {
+    const [tables, setTables] = useState([]);
+    const [selectedTableId, setSelectedTableId] = useState(null);
+    const [reservationMessage, setReservationMessage] = useState('');
+
+    useEffect(() => {
+        const fetchTables = async () => {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/table');
+                const data = await response.json();
+                setTables(data);
+            } catch (error) {
+                console.error('Error fetching tables:', error);
+            }
+        };
+
+        fetchTables();
+    }, []);
+
+    const handleTableClick = (table) => {
+        if (table.status === 'free') {
+            setSelectedTableId(table.id);
+            setReservationMessage('');
+        } else {
+            setReservationMessage('This table is already reserved.');
+        }
+    };
+
     return (
         <>
             <div className="container-xxl bg-white p-0">
-                {/* <!-- Spinner Start --> */}
-                {/* <div id="spinner" className="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div className="spinner-border text-primary" style= {{width: '3rem', height: '3rem'}} role="status">
-                <span className="sr-only">Loading...</span>
-            </div>
-        </div> */}
-                {/* <!-- Spinner End --> */}
-                {/* <!-- Navbar & Hero Start --> */}
                 <div className="container-xxl position-relative p-0">
                     <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
                         <Link href="" className="navbar-brand p-0">
@@ -56,26 +75,32 @@ const Booking = () => {
                 </div>
                 {/* <!-- Navbar & Hero End --> */}
                 {/* <!-- Reservation Start --> */}
-                <div className="container-xxl py-5 px-0 wow fadeInUp" data-wow-delay="0.1s">
+                <div className="container-xxl py-5 px-5 wow fadeInUp" data-wow-delay="0.1s">
                     <div className="row g-0">
-                        {/* <div className="col-md-6">
-                        <div className="video">
-                            <button type="button" className="btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                                <span></span>
-                            </button>
-                        </div>
-                    </div> */}
                         <div className="col-md-6">
-                            <div className="video">
-                                <button type="button" className="btn-play" data-bs-toggle="modal" data-bs-target="#videoModal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc">
-                                    <span></span>
-                                </button>
-                            </div>
-                        </div>
-
+                            <div className="container">
+                                <h2 className="mt-4">Table Status</h2>
+                                <h6>Light Blue: Free Tables</h6>
+                                <h6>Orange: Reserved Tables</h6>
+                                <div className="table-container mt-3 d-flex flex-wrap">
+                                    {tables.map((table) => (
+                                        <div
+                                            key={table.id}
+                                            onClick={() => handleTableClick(table)}
+                                            className={`table-item ${table.status === 'free' ? 'bg-light' : 'bg-primary text-white'}`}
+                                            style={{ flexBasis: '25%', maxWidth: '25%' }}
+                                        >
+                                            Table {table.tableNo}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>                        </div>
                         <div className="col-md-6 bg-dark d-flex align-items-center">
                             <div className="p-5 wow fadeInUp" data-wow-delay="0.2s">
                                 <h5 className="section-title ff-secondary text-start text-primary fw-normal">Reservation</h5>
+                                {reservationMessage && (
+                                    <p className="text-danger mb-3">{reservationMessage}</p>
+                                )}
                                 <h1 className="text-white mb-4">Book A Table Online</h1>
                                 <form>
                                     <div className="row g-3">
@@ -87,8 +112,7 @@ const Booking = () => {
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-floating">
-                                                <input type="email" className="form-control" id="email" placeholder="Your Email" />
-                                                <label htmlFor="email">Your Email</label>
+                                                <label className="form-control" htmlFor="tableId">{selectedTableId}</label>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
@@ -122,6 +146,7 @@ const Booking = () => {
                         </div>
                     </div>
                 </div>
+
                 <div className="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
                     <div className="container py-5">
                         <div className="row g-5">

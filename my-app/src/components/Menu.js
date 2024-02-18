@@ -8,11 +8,12 @@ import { useEffect } from 'react';
 const Menu = () => {
     const [menuItems, setMenuItems] = useState([]);
     const [cart, setCart] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState("beverages");
 
     useEffect(() => {
         const fetchMenu = async () => {
             try {
-                const response = await fetch('http://127.0.0.1:8000/menu');
+                const response = await fetch(`http://127.0.0.1:8000/menu?category=${selectedCategory}`);
                 const data = await response.json();
                 setMenuItems(data);
             } catch (error) {
@@ -21,7 +22,11 @@ const Menu = () => {
         };
 
         fetchMenu();
-    }, []);
+    }, [selectedCategory]);
+
+    const handleCategoryClick = (category) => {
+        setSelectedCategory(category);
+    };
     const addToCart = (item) => {
         const updatedCart = Array.isArray(cart) ? [...cart] : [];
         const existingItemIndex = updatedCart.findIndex(cartItem => cartItem.id === item.id);
@@ -107,29 +112,26 @@ const Menu = () => {
                         <div className="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
                             <ul className="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
                                 <li className="nav-item">
-                                    <a className="d-flex align-items-center text-start mx-3 ms-0 pb-3 active" data-bs-toggle="pill" href="#tab-1">
+                                    <a className={`d-flex align-items-center text-start mx-3 ms-0 pb-3 ${selectedCategory === 'beverages' ? 'active' : ''}`} data-bs-toggle="pill" href="#tab-1" onClick={() => handleCategoryClick('beverages')}>
                                         <i className="fa fa-coffee fa-2x text-primary"></i>
                                         <div className="ps-3">
-                                            <small className="text-body">Popular</small>
-                                            <h6 className="mt-n1 mb-0">Breakfast</h6>
+                                            <h6 className="mt-n1 mb-0">Beverages</h6>
                                         </div>
                                     </a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="d-flex align-items-center text-start mx-3 pb-3" data-bs-toggle="pill" href="#tab-2">
+                                    <a className={`d-flex align-items-center text-start mx-3 pb-3 ${selectedCategory === 'snacks' ? 'active' : ''}`} data-bs-toggle="pill" href="#tab-1" onClick={() => handleCategoryClick('snacks')}>
                                         <i className="fa fa-hamburger fa-2x text-primary"></i>
                                         <div className="ps-3">
-                                            <small className="text-body">Special</small>
-                                            <h6 className="mt-n1 mb-0">Launch</h6>
+                                            <h6 className="mt-n1 mb-0">Snacks</h6>
                                         </div>
                                     </a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-3">
+                                    <a className={`d-flex align-items-center text-start mx-3 me-0 pb-3 ${selectedCategory === 'desserts' ? 'active' : ''}`} data-bs-toggle="pill" href="#tab-1" onClick={() => handleCategoryClick('desserts')}>
                                         <i className="fa fa-utensils fa-2x text-primary"></i>
                                         <div className="ps-3">
-                                            <small className="text-body">Lovely</small>
-                                            <h6 className="mt-n1 mb-0">Dinner</h6>
+                                            <h6 className="mt-n1 mb-0">Desserts</h6>
                                         </div>
                                     </a>
                                 </li>
@@ -137,7 +139,8 @@ const Menu = () => {
                             <div className="tab-content">
                                 <div id="tab-1" className="tab-pane fade show p-0 active">
                                     <div className="row g-4">
-                                        {menuItems.map(item => (
+                                    {Array.isArray(menuItems) && menuItems.length > 0 ? (
+                                        menuItems.map(item => (
                                             <div key={item.id} className="col-lg-6">
                                                 <div className="d-flex align-items-center">
                                                     <img
@@ -160,7 +163,10 @@ const Menu = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                        ))}
+                                        ))
+                                        ) : (
+                                            <p>No items found for the {selectedCategory}.</p>
+                                        )}
                                     </div>
                                 </div>
                             </div>

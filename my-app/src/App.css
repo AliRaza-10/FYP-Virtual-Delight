@@ -146,3 +146,19 @@ body {
   background: linear-gradient(rgb(166, 159, 255), rgb(214, 214, 214));
 }
 
+
+.table-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.table-item {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  margin: 5px;
+  font-weight: bold;
+}
