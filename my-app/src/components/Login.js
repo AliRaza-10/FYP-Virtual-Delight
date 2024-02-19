@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import "C:\\Users\\A.H Computer\\FYP-Virtual Delight\\FYP-Virtual-Delight\\my-app\\src\\App.css";
 // import "E:\\FYP-Virtual-Delight\\my-app\\src\\App.css"
 // import "D:\\FYP-Virtual-Delight\\my-app\\src\\App.css"
@@ -7,6 +7,7 @@ import "C:\\Users\\A.H Computer\\FYP-Virtual Delight\\FYP-Virtual-Delight\\my-ap
 function Login() {
     const [username, setUsername] = useState(""); // State for username
     const [password, setPassword] = useState(""); // State for password
+    const navigate = useNavigate();
 
     const handleUsernameChange = (event) => {
         setUsername(event.target.value); // Update username state
@@ -32,6 +33,7 @@ function Login() {
             console.log(data);
             if (data.success) {
                 setSuccessMessage("Login Successfully");
+                navigate('/home');
                 setErrorMessage('');
             } else {
                 setErrorMessage('Login Failed');
